@@ -11,6 +11,7 @@ from motion.acc import Accelerometer
 import math
 from motion.gyro import Gyro
 import cProfile
+from motion.compass import Compass
 
 class CommHelper():
     def __enter__(self):
@@ -35,12 +36,15 @@ if __name__ == '__main__':
 #         cProfile.run('acc.get_data()')
 
         
-        gyro = Gyro(comm, 0x68, fil=Gyro.FILTER_42_SR_1K, smpl_div=49, calibrate=True)
+#         gyro = Gyro(comm, 0x68, fil=Gyro.FILTER_42_SR_1K, smpl_div=49, calibrate=True)
           
 #         print(bin(gyro.get_whoami()))
 
-        def ttt():
-            for _ in range(1000):
-                print("%f %f %f %f" % gyro.get_data())
-                
-        cProfile.run('ttt()')
+
+        com = Compass(comm, 0x1e, output_rate=Compass.OUTPUT_RATE_1_5)
+        
+        for _ in range(100):
+            time.sleep(1/1.5)
+            print(com.get_data_int())
+            
+            
