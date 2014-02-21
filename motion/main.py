@@ -25,19 +25,22 @@ class CommHelper():
 if __name__ == '__main__':
     with CommHelper() as comm:
         
-        acc = Accelerometer(comm, 0x53, calibrate=True)
-
-        for _ in range(1000):
-            data = acc.get_data()
-            print("%f %f %f %f" % (data[0], data[1], data[2], math.sqrt(data[0]**2 + data[1]**2 + data[2]**2)))
+#         acc = Accelerometer(comm, 0x53, calibrate=True)
+#  
+#         for _ in range(1000):
+#             data = acc.get_data()
+#             print("%f %f %f %f" % (data[0], data[1], data[2], math.sqrt(data[0]**2 + data[1]**2 + data[2]**2)))
 
 
 #         cProfile.run('acc.get_data()')
 
         
-#         gyro = Gyro(comm, 0x68)
-        
+        gyro = Gyro(comm, 0x68, fil=Gyro.FILTER_42_SR_1K, smpl_div=49, calibrate=True)
+          
 #         print(bin(gyro.get_whoami()))
-#         
-#         for i in range(1, 10):
-#             print(gyro.get_data())
+
+        def ttt():
+            for _ in range(1000):
+                print("%f %f %f %f" % gyro.get_data())
+                
+        cProfile.run('ttt()')

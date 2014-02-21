@@ -72,9 +72,9 @@ class Accelerometer(object):
         
         for _ in range(num_samples):
             cur = self.get_data_int()
-            x = x + cur[0]
-            y = y + cur[1]
-            z = z + cur[2]
+            x += cur[0]
+            y += cur[1]
+            z += cur[2]
             
         x = (float(x) / num_samples)
         y = (float(y) / num_samples)
@@ -100,9 +100,9 @@ class Accelerometer(object):
         z = 0
         for _ in range(n):
             data = self.get_data()
-            x = x + data[0]
-            y = y + data[1]
-            z = z + data[2]
+            x += data[0]
+            y += data[1]
+            z += data[2]
             
         x = x / n
         y = y / n
